@@ -100,5 +100,13 @@ def start_calendar():
             print("The program is exiting. Goodbye.")
         #   Check for a valid command
         else:
-            print("Invalid command. Exiting the program.")
-            start = False
+            print("Invalid command.")
+            try_again = input("Try Again? Y for Yes, N for No: ")
+            try_again = try_again.upper()
+            if try_again == "Y":
+                continue
+            else:
+                start = False
+
+
+start_calendar()
