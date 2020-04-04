@@ -48,9 +48,18 @@ def start_calendar():
             else:
                 date = input("What date? ")
                 update = input("Enter update: ")
-                calendar[date] = update
-                print("Update was successful.")
-                print(calendar)
+                if date in calendar.keys():
+                    calendar[date] = update
+                    print("Update was successful.")
+                    print(calendar)
+                else:
+                    print("There is no event on that date.")
+                    try_again = input("Try Again? Y for Yes, N for No: ")
+                    try_again = try_again.upper()
+                    if try_again == "Y":
+                        continue
+                    else:
+                        start = False
         #   Adding events to the calendar
         elif user_choice == "A":
             event = input("Enter event: ")
