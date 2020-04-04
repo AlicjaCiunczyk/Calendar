@@ -1,41 +1,43 @@
 """This is a personal calendar. It lets user add, remove, edit and view events
 in the calendar"""
 from time import sleep, strftime
+from tkinter import *
 
 OWNER_NAME = input('Add your name: ')
 calendar = {}
 
 
 def welcome():
-    'Specify a user and print a welcome message.'
 
-    print("Welcome " + OWNER_NAME + ".")
-    print("The calendar is opening...")
+    root = Tk()
+    welcome_ownr = Label(root, text = ("Welcome " + OWNER_NAME + "."))
+    welcome_ownr.grid(row = 0, column = 0)
+    open_cal = Label(root, text = "The calendar is opening...")
+    open_cal.grid(row = 1, column = 0)
     sleep(1)
-    print("Today is: " + strftime("%A %B %d, %Y"))
-    print("The time is: " + strftime("%H : %M : %S"))
+    date = Label(root, text = "Today is: " + strftime("%A %B %d, %Y"))
+    date.grid(row = 2, column = 0)
+    time = Label(root, text = "The time is: " + strftime("%H : %M : %S"))
+    time.grid(row = 2, column = 1)    
     sleep(1)
-    print("What would you like to do?")
+    to_do = Label(root, text = "What would you like to do?")
+    to_do.grid(row = 3, column = 0)
+    root.mainloop()
 
 
 def start_calendar():
-    'Create a simple calendar with user input'
 
     welcome()
     start = True
     while start:
         user_choice = input("Type A to Add, U to Update, V to View, D to Delete, X to Exit: ")
         user_choice = user_choice.upper()
-        #   Viewing the calendar
         if user_choice == "V":
-            #   Check for a non-empty calendar
             if len(calendar.keys()) < 1:
                 print("Your calendar is empty.")
             else:
                 print(calendar)
-        #   Updating the calendar
         elif user_choice == "U":
-            #   Check for a non-empty calendar
             if len(calendar.keys()) < 1:
                 print("Your calendar is empty.")
                 try_again = input("Try Again? Y for Yes, N for No: ")
@@ -44,18 +46,15 @@ def start_calendar():
                     continue
                 else:
                     start = False
-            #   If the calendar has events
             else:
                 date = input("What date? ")
                 update = input("Enter update: ")
                 calendar[date] = update
                 print("Update was successful.")
                 print(calendar)
-        #   Adding events to the calendar
         elif user_choice == "A":
             event = input("Enter event: ")
             date = input("Enter date (MM/DD/YYYY): ")
-            # Check for a valid date
             if(len(date) > 10 or int(date[6:]) < int(strftime("%Y"))):
                 print("The date provided is invalid. The event cannot take place in the past.")
                 try_again = input("Try Again? Y for Yes, N for No: ")
@@ -70,9 +69,7 @@ def start_calendar():
                 calendar[date] = event
                 print("Event added.")
                 print(calendar)
-        #   Deleting events from the calendar
         elif user_choice == "D":
-            #   Check for a non-empty calendar
             if len(calendar.keys()) < 1:
                 print("Calendar is empty.")
             else:
@@ -85,11 +82,19 @@ def start_calendar():
                         break
                     else:
                         print("Cannot delete the event - event does not exist.")
-        #   Exiting the calendar
         elif user_choice == "X":
             start = False
             print("The program is exiting. Goodbye.")
-        #   Check for a valid command
         else:
             print("Invalid command. Exiting the program.")
             start = False
+
+
+start_calendar()
+
+
+
+
+
+
+
