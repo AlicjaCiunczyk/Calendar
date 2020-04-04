@@ -50,6 +50,8 @@ def start_calendar():
                 print("The date provided is invalid. The event cannot take place in the past.")
                 try_again = input("Try Again? Y for Yes, N for No: ")
                 try_again = try_again.upper()
+                while try_again not in ["Y", "N"]:
+                    try_again = input("Try Again? Y for Yes, N for No: ").upper()
                 if try_again == "Y":
                     continue
                 else:
